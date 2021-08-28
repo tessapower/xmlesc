@@ -5,9 +5,11 @@
 #include <map>
 
 static std::map<char, std::string> m {
-    {'a', "&a;"},
-    {'b', "&b;"},
-    {'c', "&c;"},
+    {'<', "&lt;"},
+    {'>', "&gt;"},
+    {'&', "&amp;"},
+    {'\'', "&apos;"},
+    {'\"', "&quot;"},
 };
 
 int main(const int argc, const char *argv[]) {
