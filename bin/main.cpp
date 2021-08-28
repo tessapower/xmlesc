@@ -16,7 +16,12 @@ int main(const int argc, const char *argv[]) {
     const char* first_arg = argv[1];
     const char c = *first_arg;
 
-    std::cout << m[c] << std::endl;
+    auto key = m.find(c);
+    if (key != m.end()) {
+        std::cout << m[c] << std::endl;
+    } else {
+        std::cout << c << std::endl;
+    }
 
     return EXIT_SUCCESS;
 }
