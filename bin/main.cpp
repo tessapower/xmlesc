@@ -4,12 +4,16 @@
 #include <iostream>
 #include <map>
 
-int main(int argc, char *argv[]) {
-    char* first_arg = argv[1];
-    char c = *first_arg;
+static std::map<char, char> m {
+    {'a', 'z'},
+    {'b', 'y'},
+    {'c', 'x'},
+};
 
-    std::map<char, char> m { {'a', 'z'}, {'b', 'y'}, {'c', 'x'}, };
-
+int main(const int argc, const char *argv[]) {
+    const char* first_arg = argv[1];
+    const char c = *first_arg;
+    
     std::cout << m[c] << std::endl;
 
     return EXIT_SUCCESS;
