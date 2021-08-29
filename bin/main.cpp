@@ -15,13 +15,16 @@ static std::map<char, std::string> m {
 int main(const int argc, const char *argv[]) {
     const char* first_arg = argv[1];
     const char c = *first_arg;
+    std::string esc_string = "";
 
     auto key = m.find(c);
     if (key != m.end()) {
-        std::cout << m[c] << std::endl;
+        esc_string += m[c];
     } else {
-        std::cout << c << std::endl;
+        esc_string += c;
     }
+
+    std::cout << esc_string << std::endl;
 
     return EXIT_SUCCESS;
 }
