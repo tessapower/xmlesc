@@ -4,4 +4,4 @@ project(xmlesc)
 set(CMAKE_CXX_STANDARD 14)
 
 add_executable(xmlesc
-        bin/main.cpp)
+        bin/main.cpp esc_codes.cpp)
