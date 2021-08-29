@@ -1,2 +1,4 @@
-hello
-world
+{
+  "english": "hello world",
+  "german": "hallo Welt"
+}
