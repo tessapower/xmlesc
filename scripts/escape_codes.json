@@ -1,4 +1,6 @@
 {
-  "english": "hello world",
-  "german": "hallo Welt"
+  "&AElig;": { "codepoints": [198], "characters": "\u00C6" },
+  "&AMP;": { "codepoints": [38], "characters": "\u0026" },
+  "&Aacute;": { "codepoints": [193], "characters": "\u00C1" },
+  "&Abreve;": { "codepoints": [258], "characters": "\u0102" }
 }

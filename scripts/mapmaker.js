@@ -3,7 +3,11 @@
 const { readFile } = require("fs").promises;
 
 readFile("escape_codes.json", "utf8").then(text => {
-  const jsonObj = JSON.parse(text);
-  const englishHello = jsonObj.english;
-  console.log(englishHello);
+  const obj = JSON.parse(text);
+  const esc_codes = Object.keys(obj);
+  esc_codes.forEach(key => {
+    const props = obj[key];
+    const characters = props.characters;
+    console.log(characters);
+  });
 });
