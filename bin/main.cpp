@@ -7,31 +7,29 @@
 #include "../esc_codes.cpp"
 
 uint8_t num_utf8_bytes(uint8_t c);
-uint32_t parse_utf8_codepoint(uint8_t chars[], uint8_t len);
+uint32_t parse_utf8_codepoint(uint8_t const * bytes, uint8_t * out_len);
 
 int main(const int argc, const char *argv[]) {
     // Handle argc == 1
     // Handle argc > 2
-    const char* first_arg = argv[1];
+    const auto* input = (const uint8_t*)argv[1];
 //    std::string esc_string = "";
 
-    for (char* c = const_cast<char *>(first_arg); *c != '\0'; c += num_utf8_bytes(*c)) {
-        uint8_t n = num_utf8_bytes(*c);
-        uint8_t chars[n];
-        for (auto i = 0; i < n; ++i) {
-            chars[i] = *(c + i);
-        }
+    while(*input != '\0') {
+        uint8_t n = 0;
+        uint32_t codepoint = parse_utf8_codepoint(input, &n);
 
-        uint32_t codepoint = parse_utf8_codepoint(chars, n);
-        // find codepoint in map
+//        // find codepoint in map
 //        auto key = m.find(codepoint);
-
-        // add to escaped string
+//
+//        // add to escaped string
 //        if (key != m.end()) {
 //            esc_string += m[codepoint];
 //        } else {
 //            esc_string += c;
 //        }
+
+        input += n;
     }
 
 //    std::cout << esc_string << std::endl;
@@ -49,16 +47,19 @@ uint8_t num_utf8_bytes(const uint8_t c) {
     return num_bytes;
 }
 
-uint32_t parse_utf8_codepoint(uint8_t chars[], uint8_t len) {
+uint32_t parse_utf8_codepoint(uint8_t const *const bytes, uint8_t *const out_len) {
+    const uint8_t len = num_utf8_bytes(bytes[0]);
+    *out_len = len;
+
     uint32_t codepoint = 0;
     if (len == 1) {
-        codepoint = chars[0];
+        codepoint = bytes[0];
 
         return codepoint;
     }
     uint8_t mask = 0b00111111;
     for (auto i = len - 1; i > 0; --i) {
-        uint32_t tmp = chars[i] & mask;
+        uint32_t tmp = bytes[i] & mask;
         tmp <<= 6 * (len - i - 1);
         codepoint |= tmp;
     }
@@ -76,7 +77,7 @@ uint32_t parse_utf8_codepoint(uint8_t chars[], uint8_t len) {
         default:
             break;
     }
-    uint32_t tmp = chars[0] & mask;
+    uint32_t tmp = bytes[0] & mask;
     codepoint |= tmp << (6 * (len - 1));
 
     return codepoint;
