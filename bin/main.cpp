@@ -6,8 +6,13 @@
 
 #include "../esc_codes.cpp"
 
+struct Codepoint {
+    uint32_t codepoint;
+    uint8_t num_utf8_bytes;
+};
+
 uint8_t num_utf8_bytes(uint8_t c);
-uint32_t parse_utf8_codepoint(uint8_t const * bytes, uint8_t * out_len);
+Codepoint parse_utf8_codepoint(uint8_t const * bytes);
 
 int main(const int argc, const char *argv[]) {
     // Handle argc == 1
@@ -16,8 +21,7 @@ int main(const int argc, const char *argv[]) {
 //    std::string esc_string = "";
 
     while(*input != '\0') {
-        uint8_t n = 0;
-        uint32_t codepoint = parse_utf8_codepoint(input, &n);
+        Codepoint cp = parse_utf8_codepoint(input);
 
 //        // find codepoint in map
 //        auto key = m.find(codepoint);
@@ -29,7 +33,7 @@ int main(const int argc, const char *argv[]) {
 //            esc_string += c;
 //        }
 
-        input += n;
+        input += cp.num_utf8_bytes;
     }
 
 //    std::cout << esc_string << std::endl;
@@ -47,17 +51,19 @@ uint8_t num_utf8_bytes(const uint8_t c) {
     return num_bytes;
 }
 
-uint32_t parse_utf8_codepoint(uint8_t const *const bytes, uint8_t *const out_len) {
+Codepoint parse_utf8_codepoint(uint8_t const *const bytes) {
+    Codepoint cp{};
     const uint8_t len = num_utf8_bytes(bytes[0]);
-    *out_len = len;
+    cp.num_utf8_bytes = len;
 
-    uint32_t codepoint = 0;
     if (len == 1) {
-        codepoint = bytes[0];
+        cp.codepoint = bytes[0];
 
-        return codepoint;
+        return cp;
     }
+
     uint8_t mask = 0b00111111;
+    uint32_t codepoint = 0;
     for (auto i = len - 1; i > 0; --i) {
         uint32_t tmp = bytes[i] & mask;
         tmp <<= 6 * (len - i - 1);
@@ -80,5 +86,7 @@ uint32_t parse_utf8_codepoint(uint8_t const *const bytes, uint8_t *const out_len
     uint32_t tmp = bytes[0] & mask;
     codepoint |= tmp << (6 * (len - 1));
 
-    return codepoint;
+    cp.codepoint = codepoint;
+
+    return cp;
 }
