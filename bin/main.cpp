@@ -65,11 +65,12 @@ Codepoint parse_utf8_codepoint(uint8_t const *const bytes) {
     uint8_t mask = 0b00111111;
     uint32_t codepoint = 0;
     for (auto i = len - 1; i > 0; --i) {
-        uint32_t tmp = bytes[i] & mask;
-        tmp <<= 6 * (len - i - 1);
-        codepoint |= tmp;
+        // TODO: Comment this nicely
+        const uint32_t tmp = bytes[i] & mask;
+        codepoint |= tmp << 6 * (len - i - 1);
     }
 
+    // TODO: Comment this nicely
     switch(len) {
         case 2:
             mask = 0b00011111;
@@ -83,7 +84,7 @@ Codepoint parse_utf8_codepoint(uint8_t const *const bytes) {
         default:
             break;
     }
-    uint32_t tmp = bytes[0] & mask;
+    const uint32_t tmp = bytes[0] & mask;
     codepoint |= tmp << (6 * (len - 1));
 
     cp.codepoint = codepoint;
