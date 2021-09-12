@@ -18,25 +18,25 @@ int main(const int argc, const char *argv[]) {
     // Handle argc == 1
     // Handle argc > 2
     const auto* input = (const uint8_t*)argv[1];
-//    std::string esc_string = "";
+    std::string esc_string;
 
     while(*input != '\0') {
         Codepoint cp = parse_utf8_codepoint(input);
 
-//        // find codepoint in map
-//        auto key = m.find(codepoint);
-//
-//        // add to escaped string
-//        if (key != m.end()) {
-//            esc_string += m[codepoint];
-//        } else {
-//            esc_string += c;
-//        }
+        // find codepoint in map
+        auto key = m.find(cp.codepoint);
+
+        // add to escaped string
+        if (key != m.end()) {
+            esc_string += m[cp.codepoint];
+        } else {
+            std::cout << cp.codepoint << std::endl;
+        }
 
         input += cp.num_utf8_bytes;
     }
 
-//    std::cout << esc_string << std::endl;
+    std::cout << esc_string << std::endl;
 
     return EXIT_SUCCESS;
 }
