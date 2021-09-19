@@ -41,7 +41,8 @@ int main(const int argc, const char *argv[]) {
     return EXIT_SUCCESS;
 }
 
-void print_help() {
-    std::cout << "Help!" << std::endl;
-    std::cout << "  This is a helpful message!" << std::endl;
+void print_help() noexcept {
+    std::cout << "Usage: xmlesc \"html string to escape\"";
+    std::cout << "\n\nExample:";
+    std::cout << "\nxmlesc \"<h1>Hello, World!</h1>\" -> &LT;h1&GT;Hello&comma; World&excl;&LT;&sol;h1&GT;\n";
 }
