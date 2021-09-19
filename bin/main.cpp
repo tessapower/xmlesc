@@ -3,7 +3,6 @@
 //
 #include <iostream>
 #include <map>
-#include <getopt.h>
 
 #include "../src/esc_codes.cpp"
 #include "../include/utf8_utils.h"
