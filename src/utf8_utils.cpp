@@ -12,7 +12,7 @@ uint8_t num_utf8_bytes(const uint8_t c) noexcept {
     if (!(mask & c)) {
         num_bytes++;
     } else { // Otherwise, we have a multibyte unicode character
-        for ( ; (mask & c && mask > 0x1 << 4) ; mask >>= 1) {
+        for ( ; (mask & c && mask > 0x1 << 3) ; mask >>= 1) {
             num_bytes++;
         }
     }

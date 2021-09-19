@@ -16,6 +16,7 @@ int main(const int argc, const char *argv[]) {
         return EXIT_SUCCESS;
     }
 
+    // Convert first arg pointer type from const char to const uint8_t
     const auto* input = (const uint8_t*)argv[1];
     std::string esc_string;
 
