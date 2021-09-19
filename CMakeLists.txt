@@ -15,3 +15,4 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     add_subdirectory(tests)
 endif()
 
+add_library(utf8_utils STATIC ./src/utf8_utils.cpp)
