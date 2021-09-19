@@ -26,6 +26,9 @@
 *.a
 *.lib
 
+# Text Objects
+main_tests
+
 # Executables
 *.exe
 *.out
