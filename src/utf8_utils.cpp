@@ -4,7 +4,7 @@
 
 #include "../include/utf8_utils.h"
 
-uint8_t num_utf8_bytes(const uint8_t c) {
+uint8_t num_utf8_bytes(const uint8_t c) noexcept {
     uint8_t num_bytes = 0;
     uint8_t mask = 0x1 << 7;
 
@@ -20,7 +20,7 @@ uint8_t num_utf8_bytes(const uint8_t c) {
     return num_bytes;
 }
 
-Codepoint parse_utf8_codepoint(uint8_t const *const bytes) {
+Codepoint parse_utf8_codepoint(uint8_t const *const bytes) noexcept {
     Codepoint cp{};
     const uint8_t len = num_utf8_bytes(*bytes);
     cp.num_utf8_bytes = len;

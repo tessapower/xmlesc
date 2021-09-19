@@ -3,11 +3,12 @@
 //
 #include <iostream>
 #include <map>
+#include <getopt.h>
 
 #include "../src/esc_codes.cpp"
 #include "../include/utf8_utils.h"
 
-void print_help();
+void print_help() noexcept;
 
 int main(const int argc, const char *argv[]) {
     if (argc == 1 || argc > 2) {
