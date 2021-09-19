@@ -4,11 +4,17 @@
 
 #include "../include/utf8_utils.h"
 
-
 uint8_t num_utf8_bytes(const uint8_t c) {
-    uint8_t num_bytes = 1;
-    for (uint8_t mask = 0x1 << 7; (mask & c && mask > 0x1 << 4); mask >>= 1) {
+    uint8_t num_bytes = 0;
+    uint8_t mask = 0x1 << 7;
+
+    // If the MSB is 0, then we have a one-byte unicode character
+    if (!(mask & c)) {
         num_bytes++;
+    } else { // Otherwise, we have a multibyte unicode character
+        for ( ; (mask & c && mask > 0x1 << 4) ; mask >>= 1) {
+            num_bytes++;
+        }
     }
 
     return num_bytes;
@@ -16,11 +22,11 @@ uint8_t num_utf8_bytes(const uint8_t c) {
 
 Codepoint parse_utf8_codepoint(uint8_t const *const bytes) {
     Codepoint cp{};
-    const uint8_t len = num_utf8_bytes(bytes[0]);
+    const uint8_t len = num_utf8_bytes(*bytes);
     cp.num_utf8_bytes = len;
 
     if (len == 1) {
-        cp.codepoint = bytes[0];
+        cp.codepoint = *bytes;
 
         return cp;
     }

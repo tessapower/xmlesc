@@ -29,7 +29,7 @@ int main(const int argc, const char *argv[]) {
         if (key != m.end()) {
             esc_string += m[cp.codepoint];
         } else {
-            std::cout << cp.codepoint << std::endl;
+            esc_string += input[0];
         }
 
         input += cp.num_utf8_bytes;
