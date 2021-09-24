@@ -1,10 +1,9 @@
 //
 // Created by Tessa Power on 29/08/21.
 //
-#include <map>
-#include <string>
+#include "esc_codes.h"
 
-static std::map<uint32_t, std::string> m {
+std::map<uint32_t, std::string> m {
         {198, "&AElig;"},
         {38, "&AMP;"},
         {193, "&Aacute;"},
