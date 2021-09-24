@@ -2,7 +2,7 @@
 // Created by Tessa Power on 12/09/21.
 //
 
-#include "../include/utf8_utils.h"
+#include "utf8_utils.h"
 
 uint8_t num_utf8_bytes(const uint8_t c) noexcept {
     uint8_t num_bytes = 0;

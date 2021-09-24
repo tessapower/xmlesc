@@ -4,8 +4,8 @@
 #include <iostream>
 #include <map>
 
-#include "../src/esc_codes.cpp"
-#include "../include/utf8_utils.h"
+#include <utf8_utils/utf8_utils.h>
+#include "esc_codes.h"
 
 void print_help() noexcept;
 

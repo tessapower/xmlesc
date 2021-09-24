@@ -3,7 +3,7 @@ project(xmlesc VERSION 0.0.1)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(xmlesc bin/main.cpp src/utf8_utils.cpp include/utf8_utils.h src/esc_codes.cpp)
+include(FetchContent)
 
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     set(CMAKE_CXX_EXTENSIONS OFF)
@@ -15,4 +15,5 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     add_subdirectory(tests)
 endif()
 
-add_library(utf8_utils STATIC ./src/utf8_utils.cpp)
+add_subdirectory(src)
+add_subdirectory(app)

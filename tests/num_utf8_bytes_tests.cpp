@@ -2,8 +2,8 @@
 // Created by Tessa Power on 12/09/21.
 //
 
-#include "gtest/gtest.h"
-#include "../include/utf8_utils.h"
+#include <gtest/gtest.h>
+#include <utf8_utils/utf8_utils.h>
 
 // 1 byte: < (0x003C) > (0x003E) & (0x0026)
 TEST(num_utf8_bytes, one_byte) {
